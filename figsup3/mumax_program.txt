@@ -1,0 +1,31 @@
+SetGridsize(128, 32, 1)
+SetCellsize(4e-9, 4e-9, 30e-9)
+
+Msat  = 800e3
+Aex   = 13e-12
+Temp = 0
+Ku1 = 1e5       // 单轴各向异性常数 (J/m³)
+AnisU = vector(1,0,0) // 各向异性轴方向
+
+m = Uniform(-1, 0, 0)
+relax()         // high-energy states best minimized by relax()
+
+
+Bmax  := 300.0e-3
+Bstep :=  1.0e-2
+By :=1.0e-3
+MinimizerStop = 1e-6
+TableAdd(B_ext)
+i := 0
+
+
+for B:=-Bmax; B<=Bmax; B+=Bstep{
+    B_ext = vector(B, By*sin(2*pi*i/10), 0)
+    minimize()   // small changes best minimized by minimize()
+    tablesave()
+}
+for B:=Bmax; B>=-Bmax; B-=Bstep{
+    B_ext = vector(B, By*sin(2*pi*i/10), 0)
+    minimize()   // small changes best minimized by minimize()
+    tablesave()
+}

@@ -1,0 +1,1 @@
+Data and programs of work in "Perturbation_Induced_Variance_as_an_Early_Warning_Signal_for_Critical_Transitions_in_Equilibrium_Systems"
